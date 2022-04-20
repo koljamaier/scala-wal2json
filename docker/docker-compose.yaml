@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  db:
+    image: dev-wal2json-postgres
+    build: .
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
+    tmpfs:
+      - /var/lib/postgresql/data:rw
